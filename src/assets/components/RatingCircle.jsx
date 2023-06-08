@@ -15,18 +15,18 @@ const RatingCircle = ({ rating }) => {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Zeichne den ungefüllten Kreis
+    // Zeichne den ungefüllten Kreis als Hintergrund
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius - lineWidth / 2, 0, 2 * Math.PI);
     ctx.lineWidth = lineWidth;
-    ctx.strokeStyle = "#ccc";
-    ctx.stroke();
+    ctx.fillStyle = `#75d5ab`; // Hintergrundfarbe des Kreises
+    ctx.fill();
 
-    // Zeichne den Teil des Kreises entsprechend dem Rating
+    // Zeichne den gefüllten Teil des Kreises
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius - lineWidth / 2, startAngle, endAngle);
     ctx.lineWidth = lineWidth;
-    ctx.strokeStyle = "#f00"; // Farbe für den gefüllten Teil des Kreises
+    ctx.strokeStyle = "#3B4856"; // Farbe für den gefüllten Teil des Kreises
     ctx.stroke();
 
     // Schreibe die Rating-Zahl in die Mitte des Kreises
@@ -37,7 +37,9 @@ const RatingCircle = ({ rating }) => {
     ctx.fillText(rating.toFixed(1), centerX, centerY);
   }, [rating]);
 
-  return <canvas ref={canvasRef} width={100} height={100} />;
+  return (
+    <canvas ref={canvasRef} width={80} height={80} className="rating-circle" />
+  );
 };
 
 export default RatingCircle;

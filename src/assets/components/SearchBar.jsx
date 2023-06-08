@@ -4,7 +4,12 @@ function SearchBar({ text, onChange, onSearch }) {
   return (
     <div className="search-container">
       <h2>Suche</h2>
-      <input type="text" value={text} onChange={onChange} />
+      <input
+        type="text"
+        value={text}
+        onChange={onChange}
+        placeholder="Interstellar, Avengers, Titanic..."
+      />
       <button onClick={onSearch}>Suche</button>
     </div>
   );

@@ -1,0 +1,58 @@
+@font-face {
+  font-family: Bebas;
+  src: url("/Bebas_Neue/BebasNeue.ttf");
+}
+
+.movie-container {
+  background-color: #253240;
+  padding: 5rem;
+}
+.movie-grid {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); */
+
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5rem;
+}
+
+.rating-circle {
+  position: absolute;
+  top: 1%;
+  right: 2%;
+  z-index: 2;
+}
+
+.movie-img-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 2rem;
+}
+
+.movie-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 30vw;
+  width: 100%;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all ease-in-out 250ms;
+}
+.movie-item:hover {
+  transform: scale(1.1);
+}
+.movie-release-date {
+  color: grey;
+  font-size: 2.2rem;
+  font-family: Bebas;
+}
+.movie-title {
+  font-family: Bebas;
+  font-size: 2.6rem;
+  letter-spacing: 1px;
+}
