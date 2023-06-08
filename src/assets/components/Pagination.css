@@ -1,0 +1,30 @@
+@font-face {
+  font-family: Bebas;
+  src: url("/Bebas_Neue/BebasNeue.ttf");
+}
+
+.pagination-container {
+  background-color: #1a2634;
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  font-family: Bebas;
+  font-size: 1.9rem;
+  letter-spacing: 2px;
+  gap: 2rem;
+  align-items: center;
+}
+.pagination-container button {
+  border: none;
+  background-color: #75d5ab;
+  color: #3b4856;
+  font-family: sans-serif;
+  padding: 2rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  transition: all ease-in-out 150ms;
+}
+.pagination-container button:hover {
+  transform: scale(1.1);
+}
