@@ -17,7 +17,6 @@ const MovieList = ({ movies, openModal, closeModal }) => {
             key={index}
             onClick={() => openModal(movie.id)}
           >
-            <div></div>
             {/* <p className="products-title">Beschreibung: {movie.overview}</p> */}
             {/* <p className="products-title">Popularität: {movie.popularity}</p>
             <p className="products-title">Rating: {movie.vote_average}</p>

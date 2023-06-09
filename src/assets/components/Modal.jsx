@@ -27,11 +27,26 @@ const Modal = ({ isOpen, onClose, movieId }) => {
       {detailData ? (
         <div className={`modal ${isOpen ? "open" : ""}`}>
           <div className="modal-content">
-            <button className="close-btn" onClick={onClose}>
-              X
-            </button>
-            <h2>Movie ID: {movieId}</h2>
-            <h2>Movie ID: {detailData.overview}</h2>
+            <div
+              className="movie-header-img-container"
+              style={{
+                backgroundImage: `linear-gradient(to bottom, transparent, rgb(37, 50, 64,1)), url(https://image.tmdb.org/t/p/original/${detailData.backdrop_path})`,
+              }}
+            >
+              <button className="close-btn" onClick={onClose}>
+                X
+              </button>
+              {/* <h2>Movie ID: {movieId}</h2> */}
+              <h2> {detailData.title}</h2>
+              <h4>
+                {" "}
+                Veröffentlichtungsdatum:{" "}
+                {new Date(detailData.release_date).toLocaleDateString()}
+              </h4>
+              <h4> Spielfilmdauer: {detailData.runtime} min</h4>
+            </div>
+
+            <h2>Beschreibung: {detailData.overview}</h2>
           </div>
         </div>
       ) : (

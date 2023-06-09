@@ -1,5 +1,7 @@
-/* styles.css */
-
+@font-face {
+  font-family: Bebas;
+  src: url("./BebasNeue.ttf");
+}
 .modal {
   display: none;
   position: fixed;
@@ -18,12 +20,17 @@
 }
 
 .modal-content {
-  background-color: white;
+  background-color: rgb(37, 50, 64);
+  /* background-color: #253240; */
   margin: 10% auto;
   padding: 20px;
-  width: 40%;
+  width: 70%;
   text-align: center;
   position: relative;
+  border-radius: 2rem;
+  height: 70%;
+  -webkit-box-shadow: 0px 0px 28px 7px rgba(0, 0, 0, 0.76);
+  box-shadow: 0px 0px 28px 7px rgba(0, 0, 0, 0.76);
 }
 
 .close-btn {
@@ -33,9 +40,40 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
-  font-weight: 900;
-  font-size: 2rem;
+  font-weight: 600;
+  font-size: 3rem;
+  color: rgb(117, 213, 171);
 }
 .modal-content h2 {
-  color: black;
+  color: white;
+}
+.movie-header-img-container {
+  height: 60%;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: -2rem;
+  border-top-right-radius: 2rem;
+  border-top-left-radius: 2rem;
+  /* -webkit-box-shadow: inset 0px 0px 28px 7px rgba(0, 0, 0, 0.76);
+  box-shadow: inset 0px 0rem 28px 7px rgba(0, 0, 0, 0.76); */
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+.movie-header-img-container h2 {
+  font-family: Bebas;
+  font-size: 5rem;
+  text-shadow: 0 0 20px black;
+  padding: 0 2rem;
+}
+.movie-header-img-container h4 {
+  font-family: sans-serif;
+  font-size: 1.8rem;
+  font-weight: 100;
+  color: white;
+  padding: 0 2rem;
+  margin-bottom: 1rem;
 }
