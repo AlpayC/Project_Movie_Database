@@ -28,3 +28,12 @@
 .pagination-container button:hover {
   transform: scale(1.1);
 }
+@media screen and (max-width: 991.98px) {
+  .pagination-container {
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+    bottom: 0;
+    height: 10%;
+  }
+}

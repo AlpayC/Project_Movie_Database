@@ -56,3 +56,30 @@
   font-size: 2.6rem;
   letter-spacing: 1px;
 }
+
+@media screen and (max-width: 991.98px) {
+  .movie-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  .movie-item {
+    height: 40vh;
+    margin-bottom: 2rem;
+  }
+  .movie-container {
+    padding: 2rem;
+  }
+  .movie-img-container {
+    min-height: 70%;
+    max-height: 70%;
+    border-radius: 1rem;
+  }
+  .movie-item {
+    justify-content: flex-start;
+  }
+  .movie-title {
+    font-size: 2.2rem;
+    text-align: center;
+  }
+}

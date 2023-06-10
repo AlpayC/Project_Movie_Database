@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import "./RatingCircle.css";
 
 const RatingCircle = ({ rating }) => {
   const canvasRef = useRef(null);

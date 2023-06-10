@@ -1,0 +1,18 @@
+.rating-circle {
+  width: 80px;
+  height: 80px;
+}
+
+@media (max-width: 480px) {
+  .rating-circle {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .rating-circle {
+    width: 80px;
+    height: 80px;
+  }
+}

@@ -8,6 +8,7 @@
 }
 .search-container input {
   padding: 2rem;
+  color: white;
   font-size: 2rem;
   border-radius: 2rem;
   width: 100%;
@@ -35,4 +36,17 @@ nav {
 }
 .logo h1 span {
   color: #75d5ab;
+}
+@media screen and (max-width: 991.98px) {
+  nav {
+    flex-direction: column;
+    gap: 0;
+    padding: 2rem;
+  }
+  .logo h1 {
+    font-size: 5rem;
+  }
+  .search-container input {
+    padding: 1rem 2rem;
+  }
 }
