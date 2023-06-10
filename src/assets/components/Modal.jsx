@@ -37,9 +37,9 @@ const Modal = ({ isOpen, onClose, movieId }) => {
                 X
               </button>
               {/* <h2>Movie ID: {movieId}</h2> */}
+              <h5> {detailData.tagline}</h5>
               <h2> {detailData.title}</h2>
               <h4>
-                {" "}
                 Veröffentlichtungsdatum:{" "}
                 {new Date(detailData.release_date).toLocaleDateString()}
               </h4>
