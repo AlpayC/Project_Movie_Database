@@ -49,4 +49,10 @@ nav {
   .search-container input {
     padding: 1rem 2rem;
   }
+  nav {
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+    top: 0;
+  }
 }

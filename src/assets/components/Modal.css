@@ -124,3 +124,16 @@
   padding: 0 2rem;
   gap: 5rem;
 }
+@media screen and (max-width: 991.98px) {
+  .modal-content {
+    height: 95vh;
+    margin: 2rem;
+    width: 90vw;
+  }
+  .modal-content h5 {
+    display: none;
+  }
+  .modal-content h2 {
+    text-align: left;
+  }
+}

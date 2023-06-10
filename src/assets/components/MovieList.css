@@ -83,3 +83,8 @@
     text-align: center;
   }
 }
+@media screen and (max-width: 991.98px) {
+  .movie-container {
+    margin-top: 15rem;
+  }
+}
