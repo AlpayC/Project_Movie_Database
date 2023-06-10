@@ -30,8 +30,8 @@ const RatingCircle = ({ rating }) => {
     ctx.stroke();
 
     // Schreibe die Rating-Zahl in die Mitte des Kreises
-    ctx.font = "20px Arial";
-    ctx.fillStyle = "#000"; // Farbe der Rating-Zahl
+    ctx.font = "600 3rem Bebas ";
+    ctx.fillStyle = "#1A2634"; // Farbe der Rating-Zahl
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(rating.toFixed(1), centerX, centerY);

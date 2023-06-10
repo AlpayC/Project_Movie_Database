@@ -44,9 +44,41 @@ const Modal = ({ isOpen, onClose, movieId }) => {
                 {new Date(detailData.release_date).toLocaleDateString()}
               </h4>
               <h4> Spielfilmdauer: {detailData.runtime} min</h4>
+              {detailData.genres ? (
+                <section className="companie-logo-container">
+                  {detailData.production_companies.map((item, index) =>
+                    item.logo_path ? (
+                      <div
+                        className="companie-logo-bg"
+                        key={index}
+                        style={{
+                          backgroundImage: ` url(https://image.tmdb.org/t/p/original/${item.logo_path})`,
+                        }}
+                      ></div>
+                    ) : null
+                  )}
+                </section>
+              ) : (
+                <p>Daten werden geladen ...</p>
+              )}
             </div>
+            <div className="movie-details-container-modal">
+              <h2>Beschreibung: {detailData.overview}</h2>
+              <h2>Umsatz: {detailData.revenue} $</h2>
+              <h2>Budget: {detailData.budget} $</h2>
+              <h2>Votes: {detailData.vote_count} </h2>
+              <h2>Rating: {detailData.vote_average} </h2>
 
-            <h2>Beschreibung: {detailData.overview}</h2>
+              {detailData.genres ? (
+                <section>
+                  {detailData.genres.map((item, index) => (
+                    <h2 key={index}>Genres: {item.name} </h2>
+                  ))}
+                </section>
+              ) : (
+                <p>Daten werden geladen ...</p>
+              )}
+            </div>
           </div>
         </div>
       ) : (
