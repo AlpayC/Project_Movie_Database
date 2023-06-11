@@ -4,6 +4,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import "./Modal.css";
 import ReactPlayer from "react-player";
+import YouTube from "react-youtube";
 
 const Modal = ({ isOpen, onClose, movieId }) => {
   const [detailData, setDetailData] = useState();
@@ -86,20 +87,22 @@ const Modal = ({ isOpen, onClose, movieId }) => {
               <h2>Rating: {detailData.vote_average} </h2>
               <h2>Trailer: {detailData.id} </h2>
               {console.log(trailer)}
-              {trailer.id ? (
+              {trailer.id && trailer.results.length > 0 ? (
                 <section className="video-trailer-container">
-                  {trailer.results.map((item, index) =>
-                    item.key ? (
-                      <ReactPlayer
-                        key={index}
-                        controls={true}
-                        url={`https://www.youtube.com/watch?v=${item.key}`}
-                      />
-                    ) : null
-                  )}
+                  <YouTube
+                    videoId={trailer.results[0].key}
+                    opts={{
+                      playerVars: {
+                        autoplay: 0,
+                      },
+                    }}
+                    // Setze das passive Attribut hier
+                    onPlay={(event) => event.target.playVideo()}
+                    onPause={(event) => event.target.pauseVideo()}
+                  />
                 </section>
               ) : (
-                <p>Daten werden geladen ...</p>
+                <p>Trailer wird geladen ...</p>
               )}
 
               {detailData.genres ? (
