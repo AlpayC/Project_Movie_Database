@@ -3,10 +3,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import "./Modal.css";
+import ReactPlayer from "react-player";
 
 const Modal = ({ isOpen, onClose, movieId }) => {
   const [detailData, setDetailData] = useState();
   const [movie, setMovie] = useState(movieId);
+  const [trailer, setTrailer] = useState([]);
 
   useEffect(() => {
     fetch(
@@ -16,6 +18,20 @@ const Modal = ({ isOpen, onClose, movieId }) => {
       .then((detailData) => {
         setDetailData(detailData);
         console.log(detailData);
+      })
+      .catch((error) => {
+        console.log("Fehler beim laden", error);
+      });
+  }, [movieId]);
+
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=b5be86c5e3e794b34eb6cc507571c5e2&language=de-DE`
+    )
+      .then((response) => response.json())
+      .then((videoData) => {
+        setTrailer(videoData);
+        console.log(videoData);
       })
       .catch((error) => {
         console.log("Fehler beim laden", error);
@@ -68,6 +84,23 @@ const Modal = ({ isOpen, onClose, movieId }) => {
               <h2>Budget: {detailData.budget} $</h2>
               <h2>Votes: {detailData.vote_count} </h2>
               <h2>Rating: {detailData.vote_average} </h2>
+              <h2>Trailer: {detailData.id} </h2>
+              {console.log(trailer)}
+              {trailer.id ? (
+                <section className="video-trailer-container">
+                  {trailer.results.map((item, index) =>
+                    item.key ? (
+                      <ReactPlayer
+                        key={index}
+                        controls={true}
+                        url={`https://www.youtube.com/watch?v=${item.key}`}
+                      />
+                    ) : null
+                  )}
+                </section>
+              ) : (
+                <p>Daten werden geladen ...</p>
+              )}
 
               {detailData.genres ? (
                 <section>
