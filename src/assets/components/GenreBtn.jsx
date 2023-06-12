@@ -1,24 +1,26 @@
 import React from "react";
 import "./GenreBtn.css";
-import { useState } from "react";
 
-function GenreBtn(genreIds) {
-  const [genre, setGenre] = useState(genreIds);
-  console.log(genreIds);
+function GenreBtn({ genreIds, onClick }) {
   return (
-    <>
-      {genreIds.genreIds.genres ? (
-        <div className="genres-container">
-          {genreIds.genreIds.genres.map((genreItem, index) => (
-            <button genreSearchId={genreItem.id} key={index}>
+    <div className="genres-container">
+      {genreIds.map((genreItem, index) => {
+        if (genreItem.id) {
+          return (
+            <button
+              key={index}
+              onClick={() => onClick(genreItem.id)}
+              data-genre-search-id={genreItem.id}
+              className="active"
+            >
               {genreItem.name}
             </button>
-          ))}
-        </div>
-      ) : (
-        <p>Daten werden geladen ...</p>
-      )}
-    </>
+          );
+        } else {
+          return null;
+        }
+      })}
+    </div>
   );
 }
 
