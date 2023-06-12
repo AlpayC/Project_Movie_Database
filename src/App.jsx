@@ -6,7 +6,7 @@ import SearchBar from "./assets/components/SearchBar";
 import MovieList from "./assets/components/MovieList";
 import GenreBtn from "./assets/components/GenreBtn";
 
-function App() {
+function App(props) {
   const apiKey = "b5be86c5e3e794b34eb6cc507571c5e2";
   const [superData, setSuperData] = useState();
   const [pageNum, setPageNum] = useState(1);
@@ -16,6 +16,7 @@ function App() {
   const [inputVal, setInputVal] = useState("");
   const [inputGenre, setInputGenre] = useState([]);
   const [text, setText] = useState("");
+  const [newGenreOn, setNewGenreOn] = useState(true);
 
   useEffect(() => {
     fetch(
@@ -44,6 +45,20 @@ function App() {
         console.log("Fehler beim Laden", error);
       });
   }, []);
+
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=de-DE&page=${pageNum}&with_genres=${inputGenre}`
+    )
+      .then((response) => response.json())
+      .then((superData) => {
+        setSuperData(superData.results);
+        console.log(superData);
+      })
+      .catch((error) => {
+        console.log("Fehler beim Laden", error);
+      });
+  }, [pageNum, newGenreOn]);
 
   useEffect(() => {
     if (!newMoviesOn) {
@@ -101,6 +116,13 @@ function App() {
     }
   };
 
+  const handleInputClick = (event) => {
+    setInputGenre(event.target.genresearchid);
+  };
+
+  const getId = () => {
+    console.log(genreIds);
+  };
   return (
     <>
       <SearchBar
@@ -109,7 +131,7 @@ function App() {
         onSearch={handleButtonClick}
       />
       {inputGenre ? (
-        <GenreBtn genreIds={inputGenre} />
+        <GenreBtn genreIds={inputGenre} onClick={handleInputClick} />
       ) : (
         <p>Daten werden geladen ...</p>
       )}

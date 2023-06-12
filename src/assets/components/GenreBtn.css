@@ -4,6 +4,8 @@
 }
 
 .genres-container {
+  display: flex;
+  justify-content: flex-start;
   background-color: #1a2634;
   color: white;
   display: flex;
@@ -31,11 +33,11 @@
 }
 @media screen and (max-width: 991.98px) {
   .genres-container {
-    position: fixed;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 15rem;
     width: 100%;
     z-index: 5;
-    bottom: 0;
-    height: 10%;
   }
 }
 
