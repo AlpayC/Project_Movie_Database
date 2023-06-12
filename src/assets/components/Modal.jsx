@@ -3,7 +3,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import "./Modal.css";
-import ReactPlayer from "react-player";
 import YouTube from "react-youtube";
 
 const Modal = ({ isOpen, onClose, movieId }) => {
@@ -96,7 +95,6 @@ const Modal = ({ isOpen, onClose, movieId }) => {
                         autoplay: 0,
                       },
                     }}
-                    // Setze das passive Attribut hier
                     onPlay={(event) => event.target.playVideo()}
                     onPause={(event) => event.target.pauseVideo()}
                   />

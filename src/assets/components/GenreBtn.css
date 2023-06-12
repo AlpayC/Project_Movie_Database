@@ -1,0 +1,62 @@
+@font-face {
+  font-family: Bebas;
+  src: url("/Bebas_Neue/BebasNeue.ttf");
+}
+
+.genres-container {
+  background-color: #1a2634;
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  font-family: Bebas;
+  font-size: 1.9rem;
+  letter-spacing: 2px;
+  gap: 2rem;
+  align-items: center;
+  overflow-x: scroll;
+}
+.genres-container button {
+  border: none;
+  background-color: #75d5ab;
+  color: #3b4856;
+  font-family: sans-serif;
+  padding: 2rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  transition: all ease-in-out 150ms;
+}
+.genres-containerbutton:hover {
+  transform: scale(1.1);
+}
+@media screen and (max-width: 991.98px) {
+  .genres-container {
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+    bottom: 0;
+    height: 10%;
+  }
+}
+
+.genres-container::-webkit-scrollbar {
+  width: 1rem; /* Breite des Scrollbalkens */
+}
+
+.genres-container::-webkit-scrollbar-thumb {
+  background-color: #75d5ab; /* Farbe des Scrollbalken-Griffs */
+  border-radius: 4px; /* Radius des Scrollbalken-Griffs */
+}
+
+.genres-container::-webkit-scrollbar-thumb:hover {
+  background-color: #75d5ab; /* Farbe des Scrollbalken-Griffs bei Hover */
+  border-radius: 4px;
+}
+
+.genres-container::-webkit-scrollbar-track {
+  background-color: #3b4856; /* Hintergrundfarbe des Scrollbalken-Tracks */
+}
+
+.genres-container::-webkit-scrollbar-track:hover {
+  background-color: #3b4856; /* Hintergrundfarbe des Scrollbalken-Tracks bei Hover */
+}

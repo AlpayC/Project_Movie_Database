@@ -4,6 +4,7 @@ import Modal from "./assets/components/Modal";
 import Pagination from "./assets/components/Pagination";
 import SearchBar from "./assets/components/SearchBar";
 import MovieList from "./assets/components/MovieList";
+import GenreBtn from "./assets/components/GenreBtn";
 
 function App() {
   const apiKey = "b5be86c5e3e794b34eb6cc507571c5e2";
@@ -13,6 +14,7 @@ function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMovieId, setModalMovieId] = useState(null);
   const [inputVal, setInputVal] = useState("");
+  const [inputGenre, setInputGenre] = useState([]);
   const [text, setText] = useState("");
 
   useEffect(() => {
@@ -28,6 +30,20 @@ function App() {
         console.log("Fehler beim Laden", error);
       });
   }, [pageNum, newMoviesOn]);
+
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=de-DE&page=${pageNum}`
+    )
+      .then((response) => response.json())
+      .then((superData) => {
+        setInputGenre(superData);
+        console.log(superData);
+      })
+      .catch((error) => {
+        console.log("Fehler beim Laden", error);
+      });
+  }, []);
 
   useEffect(() => {
     if (!newMoviesOn) {
@@ -92,6 +108,12 @@ function App() {
         onChange={handleInputChange}
         onSearch={handleButtonClick}
       />
+      {inputGenre ? (
+        <GenreBtn genreIds={inputGenre} />
+      ) : (
+        <p>Daten werden geladen ...</p>
+      )}
+
       <Pagination pageNum={pageNum} onPageUp={pageUp} onPageDown={pageDown} />
 
       {superData ? (
