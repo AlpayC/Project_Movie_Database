@@ -5,17 +5,15 @@
 
 .genres-container {
   display: flex;
+  align-items: flex-start;
   justify-content: flex-start;
   background-color: #1a2634;
   color: white;
-  display: flex;
-  justify-content: center;
   padding: 2rem;
   font-family: Bebas;
   font-size: 1.9rem;
   letter-spacing: 2px;
   gap: 2rem;
-  align-items: center;
   overflow-x: scroll;
 }
 .genres-container button {
