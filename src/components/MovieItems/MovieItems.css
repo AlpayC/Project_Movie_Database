@@ -1,18 +1,20 @@
 @font-face {
   font-family: Bebas;
-  src: url("/Bebas_Neue/BebasNeue.ttf");
+  src: url("/public/Bebas_Neue/BebasNeue.ttf");
 }
 
 .movie-container {
   background-color: #253240;
   padding: 5rem;
+  height: 100%;
 }
 .movie-grid {
   display: grid;
   /* grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); */
 
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 5rem;
+  row-gap: 12rem;
 }
 
 .rating-circle {
@@ -33,18 +35,14 @@
 }
 
 .movie-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   height: 30vw;
   width: 100%;
-  gap: 1rem;
+  text-align: center;
   cursor: pointer;
   transition: all ease-in-out 250ms;
 }
 .movie-item:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 .movie-release-date {
   color: grey;

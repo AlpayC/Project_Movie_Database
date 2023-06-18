@@ -1,9 +1,25 @@
+/* .genre-container {
+  padding: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+  transition: all ease-in-out 250ms;
+  cursor: pointer;
+  overflow-x: scroll;
+}
+.genre-container button {
+  padding: 1rem;
+}
+.genre-container button:hover {
+  transform: scale(1.05); */
+/* } */
 @font-face {
   font-family: Bebas;
   src: url("/Bebas_Neue/BebasNeue.ttf");
 }
 
-.genres-container {
+.genre-container {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -16,47 +32,53 @@
   gap: 2rem;
   overflow-x: scroll;
 }
-.genres-container button {
+.genre-container button {
   border: none;
   background-color: #75d5ab;
   color: #3b4856;
-  font-family: sans-serif;
+  font-family: bebas;
+  font-size: 3rem;
+  font-weight: 400;
+  letter-spacing: 1px;
   padding: 2rem;
   cursor: pointer;
   border-radius: 1rem;
   transition: all ease-in-out 150ms;
 }
-.genres-containerbutton:hover {
+.genre-container button:hover {
   transform: scale(1.1);
 }
-@media screen and (max-width: 991.98px) {
-  .genres-container {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 15rem;
-    width: 100%;
-    z-index: 5;
-  }
-}
-
-.genres-container::-webkit-scrollbar {
+.genre-container::-webkit-scrollbar {
   width: 1rem; /* Breite des Scrollbalkens */
 }
 
-.genres-container::-webkit-scrollbar-thumb {
+.genre-container::-webkit-scrollbar-thumb {
   background-color: #75d5ab; /* Farbe des Scrollbalken-Griffs */
   border-radius: 4px; /* Radius des Scrollbalken-Griffs */
 }
 
-.genres-container::-webkit-scrollbar-thumb:hover {
+.genre-container::-webkit-scrollbar-thumb:hover {
   background-color: #75d5ab; /* Farbe des Scrollbalken-Griffs bei Hover */
   border-radius: 4px;
 }
 
-.genres-container::-webkit-scrollbar-track {
+.genre-container::-webkit-scrollbar-track {
   background-color: #3b4856; /* Hintergrundfarbe des Scrollbalken-Tracks */
 }
 
-.genres-container::-webkit-scrollbar-track:hover {
+.genre-container::-webkit-scrollbar-track:hover {
   background-color: #3b4856; /* Hintergrundfarbe des Scrollbalken-Tracks bei Hover */
+}
+
+@media screen and (max-width: 991.98px) {
+  .genre-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 15rem;
+    width: 100%;
+  }
+  .genre-container button {
+    font-size: 2rem;
+    font-weight: 500;
+  }
 }

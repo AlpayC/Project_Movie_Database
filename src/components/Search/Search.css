@@ -6,11 +6,18 @@
   align-items: center;
   font-size: 4rem;
 }
+.search-container:focus {
+  border: 3px solid #75d5ab;
+  outline: auto;
+  border-radius: 2rem;
+}
 .search-container input {
   padding: 2rem;
   color: white;
   font-size: 2rem;
-  border-radius: 2rem;
+  border-radius: none;
+  outline: none;
+
   width: 100%;
   border: none;
   background-color: transparent;
@@ -20,6 +27,12 @@
 .search-container input:focus {
   border: 3px solid #75d5ab;
   box-shadow: none;
+  outline: none;
+  border-radius: 2rem;
+  border: none;
+}
+.search-container textarea:focus {
+  outline: none;
 }
 nav {
   display: flex;

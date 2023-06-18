@@ -39,3 +39,6 @@ h5 {
 body {
   background-color: rgb(37, 50, 64);
 }
+a {
+  text-decoration: none;
+}

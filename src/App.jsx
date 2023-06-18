@@ -1,154 +1,145 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import "./App.css";
-import Modal from "./assets/components/Modal";
-import Pagination from "./assets/components/Pagination";
-import SearchBar from "./assets/components/SearchBar";
-import MovieList from "./assets/components/MovieList";
-import GenreBtn from "./assets/components/GenreBtn";
+import Home from "./pages/Home/Home";
+import MovieDetails from "./pages/MovieDetails/MovieDetails";
+import Loader from "./pages/Loader/Loader";
 
-function App(props) {
-  const apiKey = "b5be86c5e3e794b34eb6cc507571c5e2";
-  const [superData, setSuperData] = useState([]);
-  const [pageNum, setPageNum] = useState(1);
-  const [newMoviesOn, setNewMoviesOn] = useState(true);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalMovieId, setModalMovieId] = useState(null);
+import { MovieDataContext } from "./context/Context";
+import { OrignalDataContext } from "./context/Context";
+import { PageDataContext } from "./context/Context";
+import { InputValContext } from "./context/Context";
+import { SearchedMoviesContext } from "./context/Context";
+import { SearchedGenreContext } from "./context/Context";
+import { GenreContext } from "./context/Context";
+
+function App() {
+  const [movies, setMovies] = useState([]);
+  const [originalData, setOriginalData] = useState([]);
+  const [pageNumber, setPageNumber] = useState(1);
   const [inputVal, setInputVal] = useState("");
-  const [inputGenre, setInputGenre] = useState([]);
-  const [text, setText] = useState("");
+  const [searchingMovies, setSearchingMovies] = useState(false);
+  const [searchingGenres, setSearchingGenres] = useState();
+  const [getGenre, setGetGenre] = useState([]);
 
-  useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=de-DE&page=${pageNum}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setSuperData(data.results);
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log("Fehler beim Laden", error);
-      });
-  }, [pageNum, newMoviesOn]);
+  const apiKey = "b5be86c5e3e794b34eb6cc507571c5e2";
 
+  // # Fetch Genre IDS
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=de-DE`
     )
       .then((response) => response.json())
       .then((data) => {
-        setInputGenre(data.genres);
-        console.log(data);
+        setGetGenre(data.genres);
       })
       .catch((error) => {
         console.log("Fehler beim Laden", error);
       });
   }, []);
 
+  // # Fetch Startseite
   useEffect(() => {
-    if (inputGenre.length > 0) {
+    fetch(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=de-DE&page=${pageNumber}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setMovies(data.results);
+        setOriginalData(data.results);
+        setPageNumber(pageNumber);
+        setInputVal(inputVal);
+      })
+      .catch((error) => {
+        console.log("Fehler beim Laden", error);
+      });
+  }, []);
+
+  // # Fetch Output über verschiedene Dependencies
+  useEffect(() => {
+    if (searchingGenres > 1) {
       fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=de-DE&page=${pageNum}&with_genres=${inputGenre}`
+        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=de-DE&with_genres=${searchingGenres}&page=${pageNumber}`
       )
         .then((response) => response.json())
         .then((data) => {
-          setSuperData(data.results);
-          console.log(data);
+          console.log("Fetch Genres", searchingGenres);
+          setMovies(data.results);
         })
         .catch((error) => {
           console.log("Fehler beim Laden", error);
         });
-    }
-  }, [pageNum, inputGenre]);
-
-  useEffect(() => {
-    if (!newMoviesOn) {
+    } else if (searchingMovies === true) {
+      setSearchingGenres();
       fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=de-DE&query=${inputVal}&page=${pageNum}`
+        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=de-DE&query=${inputVal}&page=${pageNumber}`
       )
         .then((response) => response.json())
         .then((data) => {
-          setSuperData(data.results);
-          console.log(data);
+          console.log("Fetch InputSearch", searchingMovies);
+          setMovies(data.results);
+          setOriginalData(data.results);
+          setPageNumber(pageNumber);
+          setInputVal(inputVal);
         })
         .catch((error) => {
           console.log("Fehler beim Laden", error);
         });
+    } else if (inputVal === "" && searchingMovies === false) {
+      fetch(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=de-DE&page=${pageNumber}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setSearchingGenres();
+          setMovies(data.results);
+          setOriginalData(data.results);
+          setPageNumber(pageNumber);
+          setInputVal(inputVal);
+        })
+        .catch((error) => {
+          console.log("Fehler beim Laden", error);
+        });
+      console.log("refreshed");
     }
-  }, [inputVal, pageNum, newMoviesOn]);
-
-  const pageUp = () => {
-    setPageNum(pageNum + 1);
-    console.log(pageNum);
-  };
-
-  const pageDown = () => {
-    if (pageNum <= 1) {
-      return;
-    } else {
-      setPageNum(pageNum - 1);
-      console.log(pageNum);
-    }
-  };
-
-  const openModal = (movieId) => {
-    setModalOpen(true);
-    setModalMovieId(movieId);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-    setModalMovieId(null);
-  };
-
-  const handleButtonClick = () => {
-    if (inputGenre.length === 0) {
-      setInputVal(text);
-    }
-  };
-
-  const handleInputChange = (event) => {
-    setText(event.target.value);
-
-    if (event.target.value === "") {
-      setNewMoviesOn(true);
-      setInputVal("");
-    } else {
-      setNewMoviesOn(false);
-      setInputVal(event.target.value);
-    }
-  };
-
-  const handleInputClick = (genreId) => {
-    if (inputGenre.includes(genreId)) {
-      setInputGenre(inputGenre.filter((id) => id !== genreId));
-    } else {
-      setInputGenre([...inputGenre, genreId]);
-    }
-  };
+  }, [inputVal, searchingMovies, pageNumber, searchingGenres]);
 
   return (
     <>
-      <SearchBar
-        value={inputVal}
-        onChange={handleInputChange}
-        onSearch={handleButtonClick}
-      />
-      <GenreBtn genreIds={inputGenre} onClick={handleInputClick} />
-
-      <Pagination pageNum={pageNum} onPageUp={pageUp} onPageDown={pageDown} />
-
-      {superData.length > 0 ? (
-        <MovieList
-          movies={superData}
-          openModal={openModal}
-          closeModal={closeModal}
-          modalOpen={modalOpen}
-        />
-      ) : (
-        <p>Daten werden geladen ...</p>
-      )}
-      <Modal isOpen={modalOpen} onClose={closeModal} movieId={modalMovieId} />
+      <SearchedMoviesContext.Provider
+        value={{ searchingMovies, setSearchingMovies }}
+      >
+        <SearchedGenreContext.Provider
+          value={{ searchingGenres, setSearchingGenres }}
+        >
+          <GenreContext.Provider value={{ getGenre, setGetGenre }}>
+            <MovieDataContext.Provider value={{ movies, setMovies }}>
+              <InputValContext.Provider value={{ inputVal, setInputVal }}>
+                <OrignalDataContext.Provider
+                  value={{ originalData, setOriginalData }}
+                >
+                  <PageDataContext.Provider
+                    value={{ pageNumber, setPageNumber }}
+                  >
+                    <BrowserRouter>
+                      <Routes>
+                        <Route path="/" element={<Loader />} />
+                        <Route path="/home/" element={<Home />} />
+                        <Route
+                          path="/home/moviedetails/:id"
+                          element={<MovieDetails />}
+                        />
+                      </Routes>
+                    </BrowserRouter>
+                  </PageDataContext.Provider>
+                </OrignalDataContext.Provider>
+              </InputValContext.Provider>
+            </MovieDataContext.Provider>
+          </GenreContext.Provider>
+        </SearchedGenreContext.Provider>
+      </SearchedMoviesContext.Provider>
     </>
   );
 }
