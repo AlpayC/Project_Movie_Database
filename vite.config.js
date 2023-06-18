@@ -8,10 +8,4 @@ export default defineConfig(({ command }) => {
     plugins: [react()],
     base: "/",
   };
-
-  if (command !== "serve") {
-    config.base = "/Project_Movie_Database/";
-  }
-
-  return config;
 });
