@@ -10,7 +10,7 @@ const MovieDetails = () => {
   const [detailData, setDetailData] = useState([]);
   const [trailer, setTrailer] = useState([]);
   const idParams = useParams();
-
+  const apiKey = import.meta.env.VITE_API_KEY;
   const detailPage = movies.filter((elm) => {
     return elm.id === Number(idParams.id);
   });
@@ -19,7 +19,7 @@ const MovieDetails = () => {
     fetch(
       `https://api.themoviedb.org/3/movie/${Number(
         idParams.id
-      )}?api_key=b5be86c5e3e794b34eb6cc507571c5e2&language=de-DE`
+      )}?api_key=${apiKey}&language=de-DE`
     )
       .then((response) => response.json())
       .then((detailData) => {
@@ -35,7 +35,7 @@ const MovieDetails = () => {
     fetch(
       `https://api.themoviedb.org/3/movie/${Number(
         idParams.id
-      )}/videos?api_key=b5be86c5e3e794b34eb6cc507571c5e2&language=de-DE`
+      )}/videos?api_key=${apiKey}&language=de-DE`
     )
       .then((response) => response.json())
       .then((videoData) => {

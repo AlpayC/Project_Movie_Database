@@ -22,8 +22,7 @@ function App() {
   const [searchingMovies, setSearchingMovies] = useState(false);
   const [searchingGenres, setSearchingGenres] = useState();
   const [getGenre, setGetGenre] = useState([]);
-
-  const apiKey = "b5be86c5e3e794b34eb6cc507571c5e2";
+  const apiKey = import.meta.env.VITE_API_KEY;
 
   // # Fetch Genre IDS
   useEffect(() => {

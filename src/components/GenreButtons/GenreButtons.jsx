@@ -8,8 +8,6 @@ import {
 import "./GenreButtons.css";
 
 const GenreButtons = () => {
-  const apiKey = "b5be86c5e3e794b34eb6cc507571c5e2";
-
   const { movies, setMovies } = useContext(MovieDataContext);
   const { searchingGenres, setSearchingGenres } =
     useContext(SearchedGenreContext);
