@@ -10,7 +10,6 @@ const MovieDetails = () => {
   const [detailData, setDetailData] = useState([]);
   const [trailer, setTrailer] = useState([]);
   const idParams = useParams();
-  const apiKey = import.meta.env.VITE_API_KEY;
 
   const detailPage = movies.filter((elm) => {
     return elm.id === Number(idParams.id);
@@ -20,7 +19,7 @@ const MovieDetails = () => {
     fetch(
       `https://api.themoviedb.org/3/movie/${Number(
         idParams.id
-      )}?api_key=${apiKey}&language=de-DE`
+      )}?api_key=b5be86c5e3e794b34eb6cc507571c5e2&language=de-DE`
     )
       .then((response) => response.json())
       .then((detailData) => {
@@ -36,7 +35,7 @@ const MovieDetails = () => {
     fetch(
       `https://api.themoviedb.org/3/movie/${Number(
         idParams.id
-      )}/videos?api_key=${apiKey}&language=de-DE`
+      )}/videos?api_key=b5be86c5e3e794b34eb6cc507571c5e2&language=de-DE`
     )
       .then((response) => response.json())
       .then((videoData) => {
@@ -66,7 +65,7 @@ const MovieDetails = () => {
               <h5> {detailData.tagline}</h5>
               <h2> {detailData.title}</h2>
               <h4>
-                Veröffentlichtungsdatum:
+                Veröffentlichtungsdatum:{" "}
                 {new Date(detailData.release_date).toLocaleDateString()}
               </h4>
               <h4> Spielfilmdauer: {detailData.runtime} min</h4>
